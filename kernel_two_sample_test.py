@@ -31,7 +31,7 @@ def compute_null_distribution(K, m, n, iterations=10000, verbose=False,
             stdout.flush()
         idx = rng.permutation(m+n)
         K_i = K[idx, idx[:, None]]
-        mmd2u_null[i] = MMD2u(K_i, m, n)
+        mmd2u_null[i] = (n+m) * MMD2u(K_i, m, n)
 
     if verbose:
         print("")
@@ -53,7 +53,7 @@ def compute_null_distribution_given_permutations(K, m, n, permutation,
     for i in range(iterations):
         idx = permutation[i]
         K_i = K[idx, idx[:, None]]
-        mmd2u_null[i] = MMD2u(K_i, m, n)
+        mmd2u_null[i] = (n+m) * MMD2u(K_i, m, n)
 
     return mmd2u_null
 
